@@ -1,0 +1,117 @@
+{
+    "version": 2,
+    "inquiries": [
+        {
+            "id": "FB4YZ599uhN4NmYQdPdC7",
+            "query": "SELECT c.CustomerID,c.CompanyName,c.Country,c.Region,c.ContactName,c.City,\no.OrderDate,o.ShipVia,o.Freight,o.ShipCountry,o.ShipRegion,\nod.UnitPrice,od.Quantity,od.Discount,pd.ProductName,pd.Discontinued,\ncg.CategoryName,r.RegionDescription\nFROM Customers as c \nFULL OUTER JOIN Orders as o ON o.CustomerID = c.CustomerID \nFULL OUTER JOIN OrderDetails as od ON od.OrderID = o.OrderID\nFULL OUTER JOIN Products as pd ON od.ProductID = pd.ProductID\nFULL OUTER JOIN Categories as cg ON pd.CategoryID = cg.CategoryID\nFULL OUTER JOIN EmployeeTerritories as et ON o.EmployeeID = et.EmployeeID\nFULL OUTER JOIN Territories as t ON t.TerritoryID = et.TerritoryID\nFULL OUTER JOIN Regions as r  ON t.RegionID = r.RegionID\n",
+            "viewType": "chart",
+            "viewOptions": {
+                "data": [],
+                "layout": {
+                    "xaxis": {
+                        "range": [
+                            -1,
+                            6
+                        ],
+                        "autorange": true
+                    },
+                    "yaxis": {
+                        "range": [
+                            -1,
+                            4
+                        ],
+                        "autorange": true
+                    },
+                    "autosize": true
+                },
+                "frames": []
+            },
+            "name": "TestsAndPracticing",
+            "createdAt": "2024-07-18T02:40:52.323Z"
+        },
+        {
+            "id": "43MzkFYqpmlqVxCBxYgiA",
+            "query": "--ALTER TABLE Employees\n--ADD EmployeeNamess TEXT;\n\n\n--UPDATE Employees\n--SET EmployeeNamess = LastName || ' ' || FirstName; \n--WHERE EmployeeNamess IS NULL AND EmployeeID;\n\n\n--SELECT * FROM Employees\n\n--ALTER TABLE `Order Details` \n--RENAME to OrderDetails\n\n\nSELECT Discontinued FROM Products\nWHERE Discontinued = 1\n\n--,e.EmployeeNamess, e.EmployeeID, e.Title, e.Country, e.City\n\n--FULL OUTER JOIN Employees as e ON e.EmployeeID = o.EmployeeID\n",
+            "viewType": "chart",
+            "viewOptions": {
+                "data": [],
+                "layout": {
+                    "xaxis": {
+                        "range": [
+                            -1,
+                            6
+                        ],
+                        "autorange": true
+                    },
+                    "yaxis": {
+                        "range": [
+                            -1,
+                            4
+                        ],
+                        "autorange": true
+                    },
+                    "autosize": true
+                },
+                "frames": []
+            },
+            "name": "updatingTable",
+            "createdAt": "2024-07-18T12:30:40.071Z"
+        },
+        {
+            "id": "Lb1iYoxFFHpNaO7q2Kvt2",
+            "query": "SELECT DISTINCT(p.ProductID), od.Discount,p.discontinued,p.UnitPrice,o.OrderDate\nFROM Products as P\nLEFT JOIN OrderDetails as od ON p.ProductID = od.ProductID\nLEFT JOIN Orders as o ON od.OrderID = o.OrderID\n--WHERE ShippedDate = NULL\n--,p.UnitPrice,od.UnitPrice\n--\n\n--ORDER BY OrderDate ASC\n\n--GROUP BY c.Region ",
+            "viewType": "chart",
+            "viewOptions": {
+                "data": [],
+                "layout": {
+                    "xaxis": {
+                        "range": [
+                            -1,
+                            6
+                        ],
+                        "autorange": true
+                    },
+                    "yaxis": {
+                        "range": [
+                            -1,
+                            4
+                        ],
+                        "autorange": true
+                    },
+                    "autosize": true
+                },
+                "frames": []
+            },
+            "name": "groupby",
+            "createdAt": "2024-07-19T16:24:51.948Z"
+        },
+        {
+            "id": "qt9Y_1lyb8IjD944Nu7HP",
+            "query": "WITH ProductsCTE AS \n(\nSELECT p.ProductID,OrderDate, od.Discount,p.discontinued,p.UnitPrice , ROW_NUMBER() OVER(PARTITION BY p.ProductID ORDER BY p.ProductID)\nAS RowNumber\nFROM Products as P\nLEFT JOIN OrderDetails as od ON p.ProductID = od.ProductID\nLEFT JOIN Orders as o ON od.OrderID = o.OrderID\n  )\n--DELETE FROM Products\n-- ProductID IN (\n--    SELECT ProductID\n--    FROM ProductsCTE\n--    WHERE RowNumber > 1\n--);\nSELECT * FROM ProductsCTE",
+            "viewType": "chart",
+            "viewOptions": {
+                "data": [],
+                "layout": {
+                    "xaxis": {
+                        "range": [
+                            -1,
+                            6
+                        ],
+                        "autorange": true
+                    },
+                    "yaxis": {
+                        "range": [
+                            -1,
+                            4
+                        ],
+                        "autorange": true
+                    },
+                    "autosize": true
+                },
+                "frames": []
+            },
+            "name": "duplicates",
+            "createdAt": "2024-07-22T22:45:24.303Z"
+        }
+    ]
+}
